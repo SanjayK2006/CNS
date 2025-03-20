@@ -1,6 +1,5 @@
 ## EX. NO: 1(A) : IMPLEMENTATION OF CAESAR CIPHER
- 
-
+## DATE: 20-03-25
 ## AIM:
 
 To implement the simple substitution technique named Caesar cipher using C language.
@@ -28,7 +27,68 @@ becomes C. To change a message back, each letter is replaced by the one three be
 
 
 PROGRAM :-
+```
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int main() {
+    char plain[100], cipher[100];
+    int key, i, length;
+
+    // Get plain text input
+    printf("Enter the plain text: ");
+    scanf("%s", plain);
+
+    // Get key value
+    printf("Enter the key value: ");
+    scanf("%d", &key);
+
+    printf("\nPLAIN TEXT: %s", plain);
+    printf("\nENCRYPTED TEXT: ");
+
+    length = strlen(plain);
+
+    // Encryption
+    for (i = 0; i < length; i++) {
+        cipher[i] = plain[i] + key;
+
+        // Handling uppercase letters
+        if (isupper(plain[i]) && cipher[i] > 'Z') {
+            cipher[i] = cipher[i] - 26;
+        }
+        // Handling lowercase letters
+        if (islower(plain[i]) && cipher[i] > 'z') {
+            cipher[i] = cipher[i] - 26;
+        }
+        printf("%c", cipher[i]);
+    }
+    cipher[length] = '\0'; // Null-terminate the cipher text string
+
+    printf("\nDECRYPTED TEXT: ");
+
+    // Decryption
+    for (i = 0; i < length; i++) {
+        plain[i] = cipher[i] - key;
+
+        // Handling uppercase letters
+        if (isupper(cipher[i]) && plain[i] < 'A') {
+            plain[i] = plain[i] + 26;
+        }
+        // Handling lowercase letters
+        if (islower(cipher[i]) && plain[i] < 'a') {
+            plain[i] = plain[i] + 26;
+        }
+        printf("%c", plain[i]);
+    }
+    plain[length] = '\0'; // Null-terminate the plain text string
+
+    return 0;
+}
+```
 
 
 
 OUTPUT :-
+![Screenshot 2025-03-20 091218](https://github.com/user-attachments/assets/009266f3-ebb8-4368-b35f-d9aeff17bb52)
+
